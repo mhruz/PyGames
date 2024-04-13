@@ -4,7 +4,7 @@ import numpy as np
 from pygame import mixer
 from utils import load_image
 from globals import *
-from Vilda.Levels import Level, create_level_random
+from Vilda.Levels import *
 
 from Little_Bees import Vilda
 from Tiles import SolidTile
@@ -14,8 +14,8 @@ def main():
     pg.init()
     mixer.init()
 
-    screen = pg.display.set_mode((RESOLUTION[0], RESOLUTION[1]), pg.FULLSCREEN)
-    # screen = pg.display.set_mode((RESOLUTION[0], RESOLUTION[1]))
+    # screen = pg.display.set_mode((RESOLUTION[0], RESOLUTION[1]), pg.FULLSCREEN)
+    screen = pg.display.set_mode((RESOLUTION[0], RESOLUTION[1]))
 
     # create the background, tile the bgd image
     background = pg.Surface(SCREEN_RECT.size)
@@ -65,7 +65,8 @@ def main():
     collision_sprites = pg.sprite.Group()
 
     level01 = Level()
-    level01.set_map(create_level_random((20, 15)))
+    # level01.set_map(create_level_random((20, 15)))
+    level01.set_map(create_level_continuous((20, 15), max_diff=2))
     level01_tiles = level01.render_map(all_sprites)
 
     # floor_sprites = pg.sprite.RenderUpdates()

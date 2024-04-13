@@ -10,9 +10,27 @@ def create_level_random(size):
     level_map = np.zeros(size)
 
     max_height = 8
-    heights = np.random.randint(0, max_height, size=size[0])
+    heights = np.random.randint(0, max_height + 1, size=size[0])
     for i, h in enumerate(heights):
-        level_map[i, size[1]-h:] = 1
+        level_map[i, size[1] - h:] = 1
+
+    return level_map
+
+
+def create_level_continuous(size, max_diff=1):
+    level_map = np.zeros(size)
+    max_height = 8
+
+    current_height = np.random.randint(0, max_height + 1)
+    for i, _ in enumerate(level_map):
+        level_map[i, size[1] - current_height:] = 1
+        diff = np.random.randint(-max_diff, max_diff + 1)
+        current_height += diff
+        if current_height > max_height:
+            current_height = max_height
+
+        if current_height < 0:
+            current_height = 0
 
     return level_map
 
